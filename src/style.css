@@ -80,3 +80,9 @@ body {
 .answers-button:active {
     box-shadow: inset 1px 1px 10px;
 }
+
+.question-form
+{
+    display: flex;
+    flex-direction: row;
+}
