@@ -8,6 +8,7 @@ export default function App() {
     function toggle() {
         setWelcome(prevWelcome => !prevWelcome)
     }
+
     return (
         welcome ? <Welcome toggle={toggle} /> : <Card />
     )

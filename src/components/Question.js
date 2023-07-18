@@ -1,21 +1,26 @@
 import React from "react"
 
-export default function Question() {
+export default function Question(props) {
+
+    const shuffledAnswers = [...props.answers].sort(() => Math.random() - 0.5)
+
     return (
         <form className="question-form">
-            <h2 className="question-text">Question</h2>
-            <input type="radio" id="value1" />
-            <label htmlFor="value1">Value 1</label>
-            <br/>
-            <input type="radio" id="value2" />
-            <label htmlFor="value2">Value 2</label>
-            <br/>
-            <input type="radio" id="value3" />
-            <label htmlFor="value3">Value 3</label>
-            <br/>
-            <input type="radio" id="value4" />
-            <label htmlFor="value4">Value 4</label>
-            <br/>
+            <h5 className="question-text">{props.question}</h5>
+            <div className="answers">
+                <input type="radio" id="value1" />
+                <label htmlFor="value1">{shuffledAnswers[0]}</label>
+                <br />
+                <input type="radio" id="value2" />
+                <label htmlFor="value2">{shuffledAnswers[1]}</label>
+                <br />
+                <input type="radio" id="value3" />
+                <label htmlFor="value3">{shuffledAnswers[2]}</label>
+                <br />
+                <input type="radio" id="value4" />
+                <label htmlFor="value4">{shuffledAnswers[3]}</label>
+                <br />
+            </div>
 
         </form>
     )

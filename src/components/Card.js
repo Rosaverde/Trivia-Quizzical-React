@@ -1,8 +1,33 @@
 import React from "react";
-import Question from "./Question"
+import Question from "./Question";
 
-export default function Card(props) {
-    const questions = [1, 2, 3, 4, 5].map(() => <Question />)
+export default function Card() {
+    
+    const [question, setQuestion] = React.useState({})
+
+
+    React.useEffect(() =>{
+        async function getQuestions()
+        {            
+            const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+            const data = await res.json()
+            setQuestion(data.results)
+        }
+        getQuestions()
+    },[])
+    
+    const questionElements = [];
+
+    if(question.length > 0)
+    {
+        questionElements.push(question.map(question =>{
+            const answers = [...question.incorrect_answers, question.correct_answer]
+            return <Question question={question.question} answers={answers} correct_answer={question.correct_answer}/>
+            }))
+    }
+
+
+
     return (
         <main className="main-container">
 
@@ -10,7 +35,7 @@ export default function Card(props) {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M63.4095 81.3947C35.1213 50.8507 -2.68211 21.7816 1.17274 -19.6933C5.43941 -65.599 39.854 -105.359 82.4191 -123.133C122.797 -139.994 170.035 -130.256 205.822 -105.149C235.947 -84.0141 236.823 -43.8756 246.141 -8.27104C256.17 30.0508 282.521 70.8106 260.501 103.779C237.539 138.159 188.991 143.432 147.931 138.768C112.318 134.723 87.7505 107.677 63.4095 81.3947Z" fill="#FFFAD1" />
             </svg>
 
-            {questions}
+            {questionElements}
 
             <button className="answers-button">Check answers</button>
 
